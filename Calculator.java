@@ -19,7 +19,7 @@ class Calculator extends JFrame implements ActionListener {
 
         display = new JTextField(20);
         display.setHorizontalAlignment(SwingConstants.RIGHT);
-        display.setFont(new Font("Arial", Font.BOLD, 24));
+        display.setFont(new Font("Arial", Font.BOLD, 50));
         display.setEditable(false);
 
         
@@ -67,7 +67,7 @@ class Calculator extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-
+    
         if (command.matches("[0-9]") || command.equals(".")) {
             
             if (!operator.isEmpty()) {
@@ -77,7 +77,7 @@ class Calculator extends JFrame implements ActionListener {
             }
             display.setText(firstOperand + operator + secondOperand);
         } else if (command.equals("C")) {
-           
+            
             firstOperand = operator = secondOperand = "";
             display.setText("");
         } else if (command.equals("=")) {
@@ -86,7 +86,7 @@ class Calculator extends JFrame implements ActionListener {
                 double result = 0.0;
                 double num1 = Double.parseDouble(firstOperand);
                 double num2 = Double.parseDouble(secondOperand);
-
+    
                 switch (operator) {
                     case "+":
                         result = num1 + num2;
@@ -101,9 +101,15 @@ class Calculator extends JFrame implements ActionListener {
                         result = num1 / num2;
                         break;
                 }
-
+    
                 
-                display.setText(String.valueOf(result));
+                if (result == (int) result) {
+                    display.setText(String.valueOf((int) result));
+                } else {
+                    display.setText(String.valueOf(result));
+                }
+    
+                
                 firstOperand = String.valueOf(result);
                 operator = secondOperand = "";
             }
@@ -123,4 +129,5 @@ class Calculator extends JFrame implements ActionListener {
             display.setText(firstOperand + operator + secondOperand);
         }
     }
+    
 }
